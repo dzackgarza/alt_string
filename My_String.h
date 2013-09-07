@@ -93,7 +93,7 @@ void STRcat(STRING& A, const STRING& B);
 //      Returns the index of the first occurence of c in s.
 //      If the s does not contain c, returns -1
                          // in      // in
-unsigned char_position(const STRING& s, char c);
+int char_position(const STRING& s, char c);
 /**********************************************/
 
 
