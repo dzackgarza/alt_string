@@ -33,6 +33,24 @@ int main()
 
 void runtests ()
 {
+    cout
+    << "Project 1: Modularization\n"
+    << "Test Driver\n"
+    << "*******************************\n"
+    << "1 - Compare\n"
+    << "2 - Copy\n"
+    << "3 - Length\n"
+    << "4 - Compare Alphabetically\n"
+    << "5 - Concatentation\n"
+    << "6 - Character Position\n"
+    << "7 - Numeric Position\n"
+    << "8 - Display\n"
+    << "9 - Assign\n"
+    << "10 - Create Empty\n"
+    << "*******************************\n"
+    << "Choose a test: ";
+    unsigned choice;
+    cin >> choice;
     test_char_position();
     test_num_position();
     test_STRcompare();
