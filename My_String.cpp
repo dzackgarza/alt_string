@@ -35,9 +35,20 @@ unsigned STRlen(const STRING& s)
 {
     return s.len;
 }
-bool alpha_compare(const STRING& A, const STRING& B)
-{
 
+bool alpha_compare(STRING A, STRING B)
+{
+    toLowerCase(A); toLowerCase(B);
+    for (int i = 0; i < A.len && i < B.len; i++)
+    {
+        if (A.contents[i] != B.contents[i])
+        {
+            if (A.contents[i] < B.contents[i]) return true;
+            else if (A.contents[i] > B.contents[i]) return false;
+        }
+    }
+    if (STRlen(A) < STRlen(B)) return true;
+    else if (STRlen(A) > STRlen(B)) return false;
 }
 
 void STRcat(STRING& A, const STRING& B)

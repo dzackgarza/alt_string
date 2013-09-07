@@ -60,7 +60,7 @@ unsigned STRlen(const STRING& s);
 // Pre:  A and B are valid STRINGS containing characters from ASCII extended/ANSI set
 // Post: After downcasing both strings,
 //       For i < Length(A) and i < Length(B),
-//       if STRcompare(A[i], B[i] = false
+//       if A[i] != B[i],
 //          && A[i] < B[i], returns TRUE
 //              (Thus STRING A comes before B alphabetically)
 //          if A[i] > B[i], returns FALSE
@@ -68,9 +68,10 @@ unsigned STRlen(const STRING& s);
 //       If, for all i, STRcompare(A[i], B[i]) == TRUE,
 //          If Length(A) < Length(B), returns TRUE
 //          If Length(A) > Length(B), returns FALSE
-//
+// Thus if A comes before B alphabetically, returns TRUE
+// If B comes before A alphabetically, returns FALSE
                          // in             // in
-bool alpha_compare(const STRING& A, const STRING& B);
+bool alpha_compare(STRING A, STRING B);
 /**********************************************/
 
 

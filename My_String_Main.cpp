@@ -22,6 +22,7 @@ void test_STRdisplay();
 void test_STRassign();
 void test_create_empty_STR();
 void test_downcase();
+void test_alpha_compare();
 void runtests();
 
 int main()
@@ -39,8 +40,29 @@ void runtests ()
     test_STRlength();
     test_STRcat();
     test_downcase();
+    test_alpha_compare();
 }
 
+void test_alpha_compare()
+{
+    cout << "\n********** Begin STRING Alpha Compare Test ******************\n";
+    // Params
+    char contents_A [] = "anterior";
+    char contents_B [] = "ante";
+
+    STRING *A = new STRING;
+    STRING *B = new STRING;
+    STRassign(*A, contents_A);
+    STRassign(*B, contents_B);
+
+    cout << "Contents of String A: '" << A->contents << "'.\n";
+    cout << "Contents of String B: '" << B->contents << "'.\n";
+    cout << "Does '" << A->contents << "' come before '" << B->contents << "' alphabetically? " << (alpha_compare(*A, *B) ? "True" : "False");
+
+    cout << "\n********** End STRING Alpha Compare Test ******************\n";
+
+
+}
 void test_downcase()
 {
     cout << "\n********** Begin STRING toLowerCase Test ******************\n";
