@@ -71,7 +71,7 @@ unsigned STRlen(const STRING& s);
 // Thus if A comes before B alphabetically, returns TRUE
 // If B comes before A alphabetically, returns FALSE
                          // in             // in
-bool alpha_compare(STRING A, STRING B);
+bool STRalpha_compare(STRING A, STRING B);
 /**********************************************/
 
 
@@ -156,3 +156,6 @@ bool isEmpty(const STRING& s);
 // Post: All uppercase letters in s are now lowercase.
 //           //inout
 void toLowerCase(STRING& s);
+void toUpperCase(STRING& s);
+
+void setLen(STRING& s, unsigned length);

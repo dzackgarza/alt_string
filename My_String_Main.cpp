@@ -47,7 +47,7 @@ void test_alpha_compare()
 {
     cout << "\n********** Begin STRING Alpha Compare Test ******************\n";
     // Params
-    char contents_A [] = "anterior";
+    char contents_A [] = "Anterior";
     char contents_B [] = "ante";
 
     STRING *A = new STRING;
@@ -57,18 +57,17 @@ void test_alpha_compare()
 
     cout << "Contents of String A: '" << A->contents << "'.\n";
     cout << "Contents of String B: '" << B->contents << "'.\n";
-    cout << "Does '" << A->contents << "' come before '" << B->contents << "' alphabetically? " << (alpha_compare(*A, *B) ? "True" : "False");
+    cout << "Does '" << A->contents << "' come before '" << B->contents << "' alphabetically?\nSTRalpha_compare says: " << (STRalpha_compare(*A, *B) ? "True" : "False");
 
     cout << "\n********** End STRING Alpha Compare Test ******************\n";
-
-
 }
+
 void test_downcase()
 {
     cout << "\n********** Begin STRING toLowerCase Test ******************\n";
     // Params
-    char contents [] = "AaAaAaAaA";
-    char lc_contents[] = "aaaaaaaaa";   // Manually insert correct lowercase equivalent.
+    char contents [] = "dDdDdDdDd";
+    char lc_contents[] = "ddddddddd";   // Manually insert correct lowercase equivalent.
     //
 
     STRING *s = new STRING;
@@ -77,6 +76,8 @@ void test_downcase()
     STRassign(*lc_s, lc_contents);
 
     cout << "String contents before running toLowerCase: '" << s->contents << "'.\n";
+    toUpperCase(*s);
+    cout << "String contents after running toUpperCase: '" <<  s->contents << "'.\n";
     toLowerCase(*s);
     cout << "String contents after running toLowerCase: '" <<  s->contents << "'.\n";
 
