@@ -43,16 +43,25 @@ void runtests ()
 
 void test_downcase()
 {
-    cout << "\n********** Begin STRING toLowerCaseTest ******************\n";
+    cout << "\n********** Begin STRING toLowerCase Test ******************\n";
+    // Params
     char contents [] = "AaAaAaAaA";
-    STRING *s = new STRING;
-    STRassign(*s, contents);
-    cout << "String contents before running toLowerCase: '" << s->contents << "'.\n";
+    char lc_contents[] = "aaaaaaaaa";   // Manually insert correct lowercase equivalent.
+    //
 
+    STRING *s = new STRING;
+    STRING *lc_s = new STRING;
+    STRassign(*s, contents);
+    STRassign(*lc_s, lc_contents);
+
+    cout << "String contents before running toLowerCase: '" << s->contents << "'.\n";
     toLowerCase(*s);
     cout << "String contents after running toLowerCase: '" <<  s->contents << "'.\n";
 
-    cout << "\n********** EndSTRING toLowerCaseTest ******************\n";
+    if (STRcompare(*s, *lc_s) == true) cout << "Test passed";
+    else cout << "Test failed.";
+
+    cout << "\n********** End STRING toLowerCase Test ******************\n";
 }
 
 void test_STRcat()
@@ -80,7 +89,7 @@ void test_STRlength()
     cout << "\n********** Begin STRING Length Test ******************\n";
     // Set parameters
     char contents[] = "abcde";
-    unsigned actual_length = 5;
+    unsigned actual_length = 5; // Manually set the actual length of the string.
     //
 
     STRING *s = new STRING;
@@ -100,6 +109,7 @@ void test_STRlength()
     cout << "\n********** End STRING Length Test ******************\n";
 
 }
+
 void test_STRcopy()
 {
     cout << "\n********** Begin STRING Copy Test ******************\n";
