@@ -1,7 +1,7 @@
 /*****************************************************
 
     Zack Garza
-    CISP 400 - TTH 5:30 pm
+    CISP 430 - TTH 5:30 pm
     Programming Project 1 - STRING Implementation
     September 12, 2013
 
@@ -11,6 +11,8 @@
 #include "My_String.h"
 using namespace std;
 
+//               Main Functions                     //
+/****************************************************/
 bool STRcompare (const STRING& s1, const STRING& s2)
 {
     if (STRlen(s1) != STRlen(s2)) return false;
@@ -101,7 +103,6 @@ void STRassign(STRING& str, const char cstr[])
 
 void create_empty_STR(STRING& s)
 {
-    s.contents[0] = 0;
     setLen(s, 0);
 }
 
@@ -121,7 +122,10 @@ void toLowerCase(STRING& s)
 {
     for (unsigned i = 0; i < STRlen(s); i++)
     {
-        s.contents[i] |= 'a'-'A'; // 32 = 0010 0000; Equivalent to adding 32 to ASCII value by setting the 5th bit.
+        if (s.contents[i] >= 'A' && s.contents[i] <= 'Z')
+        {
+            s.contents[i] |= 'a'-'A'; // 32 = 0010 0000; Equivalent to adding 32 to ASCII value by setting the 5th bit.
+        }
     }
 }
 
@@ -129,6 +133,15 @@ void toUpperCase(STRING& s)
 {
     for (unsigned i = 0; i < STRlen(s); i++)
     {
-        s.contents[i] &= ('A' - 'a' - 1);    // 223 = 1101 1111; Equivalent to subtracting 32 from ASCII value by clearing the 5th bit.
+        if (s.contents[i] >= 'a' && s.contents[i] <= 'z')
+        {
+            s.contents[i] &= ('A' - 'a' - 1);    // 223 = 1101 1111; Equivalent to subtracting 32 from ASCII value by clearing the 5th bit.
+        }
     }
+}
+
+bool isEmpty(STRING& s)
+{
+    if (STRlen(s) == 0) return true;
+    else return false;
 }
