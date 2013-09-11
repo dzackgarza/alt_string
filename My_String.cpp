@@ -17,6 +17,7 @@ bool STRcompare (const STRING& s1, const STRING& s2)
 {
     if (STRlen(s1) != STRlen(s2)) return false;
     for (unsigned i = 0; i < STRlen(s1) && i < MAX_LENGTH; i++)
+    // Note - may not need to compare to MAX_LENGTH. Delete for efficiency..?
     {
         if (s1.contents[i] != s2.contents[i]) return false;
     }

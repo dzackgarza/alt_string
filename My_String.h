@@ -23,16 +23,16 @@ struct STRING
     A valid STRING S is defined as a STRING for which the following conditions hold:
     - S is not null
     - Ample memory has been allocated for S,
-    - Length(S) <= MAX_LENGTH
+    - 0 <= STRlen(S) <= MAX_LENGTH
 **/
 
 
 /**********************************************/
 // Pre:  s1 and s2 must be valid STRINGS
 // Post: Compares s1 to s2 letter by letter.
-//       If, for all i < STRlen(s1) and i < STRlen(s2),
-//       s1[i] == s2[i], returns TRUE.
-//       Also, guarantees STRlen(s1) == STRlen(s2).
+//       If, for all i < STRlen(s1) and i < MAX_LENGTH
+//       s1.contents[i] == s2.contents[i], returns TRUE.
+//       TRUE result guarantees STRlen(s1) == STRlen(s2).
                        // in              // in
 bool STRcompare (const STRING& s1, const STRING& s2);
 /**********************************************/
@@ -41,8 +41,9 @@ bool STRcompare (const STRING& s1, const STRING& s2);
 
 /**********************************************/
 // Pre:  A and B are valid STRINGS
-// Post: For i < length(B), A[i] == B[i]
+// Post: For i < STRlen(B), A.contents[i] = B.contents[i]
 //       Copies the contents of B into A, thus STRcompare(B,A) = TRUE
+//       and STRlen(A) == STRlen(B).
               // in           // in
 void STRcopy(STRING& A, const STRING& B);
 /**********************************************/
@@ -58,6 +59,7 @@ void STRcopy(STRING& A, const STRING& B);
 //       of corresponding character positions.
 //       Thus, the length of a STRING directly reflects
 //       how many characters it contains.
+//       e.g. -- STRlen("abc") == 3
                       // in
 unsigned STRlen(const STRING& s);
 /**********************************************/
@@ -65,17 +67,19 @@ unsigned STRlen(const STRING& s);
 
 
 /**********************************************/
-// Pre:  A and B are valid STRINGS containing characters from ASCII extended/ANSI set
+// Pre:  A and B are valid STRINGS containing alphanumeric characters from extended ASCII or ANSI set
 // Post: After downcasing both strings,
 //       For i < Length(A) and i < Length(B),
-//       if A[i] != B[i],
-//          && A[i] < B[i], returns TRUE
+//       if A.contents[i] != B.contents[i],
+//          && A.contents[i] < B.contents[i], returns TRUE
 //              (Thus STRING A comes before B alphabetically)
-//          if A[i] > B[i], returns FALSE
+//          if A.contents[i] > B.contents[i], returns FALSE
 //              (Thus STRING B comes before A alphabetically)
-//       If, for all i, STRcompare(A[i], B[i]) == TRUE,
-//          If Length(A) < Length(B), returns TRUE
-//          If Length(A) > Length(B), returns FALSE
+//       If, for all i, STRcompare(A.contents[i], B.contents[i]) == TRUE,
+//          If STRlen(A) < STRlen(B), returns TRUE
+//              (A is shorter than B and is first alphabetically)
+//          If STRlen(A) > STRlen(B), returns FALSE
+//              (B is shorter than A; A does not come first)
 //
 //       Thus if A comes before B alphabetically, returns TRUE.
 //       In any other case, returns FALSE.
@@ -86,10 +90,10 @@ bool STRalpha_compare(STRING A, STRING B);
 
 
 /**********************************************/
-// Pre:  A and B are valid STRINGS, and Length(A) + Length(B) < MAX_LENGTH
-// Post: While i < Length(B) && (i + Length(A)) < MAX_LENGTH,
-//       A[Length(A) + i] = B[i]
-//       B is appended to the end of A until Length(A) == MAX_LENGTH
+// Pre:  A and B are valid STRINGS, and STRlen(A) + STRlen(B) < MAX_LENGTH (Required for full/expected concatenation)
+// Post: While i < STRlen(B) && (i + STRlen(A)) < MAX_LENGTH,
+//       A.contents[STRlen(A) + i] = B.contents[i]
+//       B is appended to the end of A until STRlen(A) == MAX_LENGTH
 //
 //       A now contains its original contents, plus as much
 //       of the contents from B as possible (as per the restrictions
@@ -101,9 +105,13 @@ void STRcat(STRING& A, const STRING& B);
 
 
 /**********************************************/
-// Pre: s is a valid STRING, and c is a valid character
-// Post: Returns the index of the first occurence of c in the STRING s.
+// Pre: s is a valid STRING, and c is a character in the extended ASCII / ANSI set.
+// Post: Returns the position of the first occurence of c in the STRING s.
+//       Characters are counted from one, such that the first character is in position one,
+//       the second character is in position two, etc.
+//
 //       Only searches the first MAX_LENGTH characters,
+//       For all i < STRlen(s), if s.contents[i] == c, return i
 //       If the s does not contain c, returns -1
                          // in      // in
 int char_position(const STRING& s, char c);
@@ -116,6 +124,7 @@ int char_position(const STRING& s, char c);
 // Post: Returns the N'th character in the contents of STRING s.
 //       Indexing begins at 1, such that the first character is obtained when n = 1,
 //       the second character at n = 2, etc.
+//       Thus, returns s.contents[i]
 //       If N > Length(s), behavior is undefined. Returns -1
                         // in      // in
 char num_position(const STRING& s, unsigned N);
@@ -124,8 +133,8 @@ char num_position(const STRING& s, unsigned N);
 
 
 /**********************************************/
-// Pre:  s is a valid STRING, containing displayable characters.
-// Post: For i < STRlen(s), s[i] is displayed to stdout.
+// Pre:  s is a valid STRING, stdout is not null.
+// Post: For i < STRlen(s), s.contents[i] is displayed to stdout.
                       // in
 void STRdisplay(const STRING& s);
 /**********************************************/
@@ -134,10 +143,10 @@ void STRdisplay(const STRING& s);
 
 /**********************************************/
 // Pre:  cstr is a well defined string, as per the standard library,
-//       that is null terminated (with '\0' specifically) and str is
+//       that is null terminated (with '\0' specifically), and str is
 //       a valid STRING.
 //       For expected behavior, cstr should also contain < MAX_LENGTH characters.
-// Post: For i < the length of cstr, str[i] == cstr[i]
+// Post: For all i < strlen(cstr), str[i] = cstr[i]
 //       Converts a string to a STRING, character by character, until
 //       str reaches MAX_LENGTH in size.
 //       Also removes the null terminator ('/0').
