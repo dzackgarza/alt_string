@@ -38,6 +38,7 @@ int main()
 
 void runtests ()
 {
+    // #TODO: Add automated tests. >> cat /usr/dict/words ?
     unsigned choice;
     cout << "Project 1: Modularization\n" << "Test Driver\n";
     while (choice != 0)
