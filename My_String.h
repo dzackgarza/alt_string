@@ -68,7 +68,7 @@ unsigned STRlen(const STRING& s);
 
 /**********************************************/
 // Pre:  A and B are valid STRINGS containing alphanumeric characters from extended ASCII or ANSI set
-// Post: After downcasing both strings,
+// Post: After downcasing the function's local copy of both strings,
 //       For i < Length(A) and i < Length(B),
 //       if A.contents[i] != B.contents[i],
 //          && A.contents[i] < B.contents[i], returns TRUE
@@ -83,7 +83,7 @@ unsigned STRlen(const STRING& s);
 //
 //       Thus if A comes before B alphabetically, returns TRUE.
 //       In any other case, returns FALSE.
-                         // in             // in
+                         // in    // in
 bool STRalpha_compare(STRING A, STRING B);
 /**********************************************/
 
@@ -98,7 +98,7 @@ bool STRalpha_compare(STRING A, STRING B);
 //       A now contains its original contents, plus as much
 //       of the contents from B as possible (as per the restrictions
 //       set by MAX_LENGTH)
-            // out          // in
+            // inout          // in
 void STRcat(STRING& A, const STRING& B);
 /**********************************************/
 
@@ -160,7 +160,7 @@ void STRassign(STRING& str, const char cstr[]);
 // Pre:  s is a valid STRING
 // Post: Converts s to an empty STRING such that isEmpty(s) == TRUE,
 //       STRlen(s) == 0, and STRdisplay(s) = ''.
-                    // out
+                      // out
 void create_empty_STR(STRING& s);
 /**********************************************/
 
