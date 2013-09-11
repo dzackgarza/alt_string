@@ -40,6 +40,7 @@ the array of char are part of our STRING, that is, the number of valid character
 MAX_STRING character array.
 
 The MAX_STRING-character array MUST NOT be null-terminated.
+
 ======================================================================================================
 
 You will provide the following functions for STRING manipulation:
@@ -74,6 +75,7 @@ contains "abcdefgh". STRING B will be unchanged by the function.
 Character position. This function takes a STRING and a character as arguments. It
 returns the position in the STRING of the first occurrence of the character. If the
 string does not contain the character, it returns -1.
+
 7
 Numeric position. This function takes a STRING and an integer n as arguments. It
 returns the character at the nth position in the string. If n is larger than the length
@@ -90,6 +92,7 @@ string and assigns the C string to the STRING.
 10
 Create an empty STRING. This function takes a STRING as an argument and
 converts it into the empty string.You will write a complete specification for this module in the form of a header file.
+
 ======================================================================================================
 
 These specifications should include, a function prototype, precise pre and post-conditions
